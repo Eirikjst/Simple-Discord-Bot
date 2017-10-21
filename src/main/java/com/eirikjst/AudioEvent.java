@@ -3,6 +3,9 @@ package com.eirikjst;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
@@ -22,6 +25,7 @@ import sx.blah.discord.util.MissingPermissionsException;
 
 public class AudioEvent {
 
+	private static final Logger log = LoggerFactory.getLogger(AudioEvent.class);
 	private final AudioPlayerManager playerManager;
 	private final Map<Long, GuildMusicManager> musicManagers;
 
@@ -33,8 +37,7 @@ public class AudioEvent {
 	}
 
 	private synchronized GuildMusicManager getGuildAudioPlayer(IGuild guild) {
-		@SuppressWarnings("deprecation")
-		long guildId = Long.parseLong(guild.getID());
+		long guildId = guild.getLongID();
 		GuildMusicManager musicManager = musicManagers.get(guildId);
 
 		if (musicManager == null) {
@@ -111,8 +114,7 @@ public class AudioEvent {
 		try {
 			channel.sendMessage(message);
 		} catch (Exception e) {
-			e.printStackTrace();
-			//log.warn("Failed to send message {} to {}", message, channel.getName(), e);
+			log.warn("Failed to send message {} to {}", message, channel.getName(), e);
 		}
 	}
 
@@ -127,8 +129,7 @@ public class AudioEvent {
 			try {
 				voiceChannel.join();
 			} catch (MissingPermissionsException e) {
-				e.printStackTrace();
-				//log.warn("Cannot enter voice channel {}", voiceChannel.getName(), e);
+				log.warn("Cannot enter voice channel {}", voiceChannel.getName(), e);
 			}
 		}
 	}

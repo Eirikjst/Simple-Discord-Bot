@@ -1,11 +1,13 @@
 package com.eirikjst;
 
 import java.util.HashMap;
-//import java.util.List;
+import java.util.List;
 import java.util.Map;
 
-//import sx.blah.discord.handle.obj.IChannel;
-//import sx.blah.discord.handle.obj.IUser;
+import sx.blah.discord.handle.impl.obj.Guild;
+import sx.blah.discord.handle.impl.obj.User;
+import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.handle.obj.IVoiceChannel;
 
 public class MessageCommands {
@@ -90,12 +92,48 @@ public class MessageCommands {
 			ivc.leave();
 		});
 	}
-	
-	/*
+	// not working
 	private void moveUser() {
 		commands.put("move", (event, args) ->{
-
+			String[] arg = args.get(0).split(" ");
+			if (!(arg.length == 2)) return;
+			System.out.println(arg.length);
+			
+			List<IVoiceChannel> channels = event.getGuild().getVoiceChannels();
+			List<IUser> allUsers = event.getGuild().getUsers();
+			
+			for (int i = 0; i < channels.size(); i++)System.out.println(channels.get(i).getName());
+			for (int i = 0; i < allUsers.size(); i++) System.out.println(allUsers.get(i).getName());
+			for (int i = 0; i < channels.size(); i++) {
+				if (channels.get(i).getName().equals(arg[1])) {
+					if (arg[0].equalsIgnoreCase("all")) {
+						System.out.println(allUsers.size());
+						for (int j = 0; j < allUsers.size(); j++) {
+							User u = new User(allUsers.get(j).getShard(),
+											  allUsers.get(j).getClient(),
+											  allUsers.get(j).getName(),
+											  allUsers.get(j).getLongID(),
+											  allUsers.get(j).getDiscriminator(),
+											  allUsers.get(j).getAvatar(),
+											  allUsers.get(j).getPresence(),
+											  false);
+							u.moveToVoiceChannel(channels.get(i));
+						}
+					} else {
+						if (allUsers.get(i).getName().equals(arg[0])) {
+							User u = new User(allUsers.get(i).getShard(),
+									  allUsers.get(i).getClient(),
+									  allUsers.get(i).getName(),
+									  allUsers.get(i).getLongID(),
+									  allUsers.get(i).getDiscriminator(),
+									  allUsers.get(i).getAvatar(),
+									  allUsers.get(i).getPresence(),
+									  false);
+							u.moveToVoiceChannel(channels.get(i));
+						}
+					}
+				}
+			}
 		});
 	}
-	*/
 }

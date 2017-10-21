@@ -19,19 +19,21 @@ public class MessageEvent {
 	
 	@EventSubscriber
 	public void onMessageReceived(MessageReceivedEvent e) {
-		if (!e.getMessage().getContent().startsWith(BotUtility.BOT_PREFIX)) {
-			return;
-		} else {
-			String[] args = e.getMessage().getContent().split(" ", 2);
-			if (args.length == 0) return;
-			
-			String commandArg = args[0].substring(1);
-			List<String> argsList = new ArrayList<>(Arrays.asList(args));
-			argsList.remove(0);
-			
-			if (commands.containsKey(commandArg)) {
-				commands.get(commandArg).runCommand(e, argsList);
+		new Thread(() -> {
+			if (!e.getMessage().getContent().startsWith(BotUtility.BOT_PREFIX)) {
+				return;
+			} else {
+				String[] args = e.getMessage().getContent().split(" ", 2);
+				if (args.length == 0) return;
+				
+				String commandArg = args[0].substring(1);
+				List<String> argsList = new ArrayList<>(Arrays.asList(args));
+				argsList.remove(0);
+				
+				if (commands.containsKey(commandArg)) {
+					commands.get(commandArg).runCommand(e, argsList);
+				}
 			}
-		}
+		}).start();
 	}
 }

@@ -50,15 +50,17 @@ public class BotUtility {
 		});
 	}
 	
-	public void login() {
+	public boolean login() {
 		System.out.println(token);
 		try {
 			client = new ClientBuilder().withToken(token).login();
 			client.getDispatcher().registerListener(new MessageEvent());
 			//Include line for audio player
-			//client.getDispatcher().registerListener(new AudioEvent());
+			client.getDispatcher().registerListener(new AudioEvent());
+			return true;
 		} catch (DiscordException e) {
 			log.debug("Could not log in", e);
+			return false;
 		}
 	}
 	

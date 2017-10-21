@@ -30,7 +30,8 @@ public class Main {
 							e.printStackTrace();
 						}
 						if (bt != null) {
-							bt.login(); botConnected = true;
+							if (bt.login() == true) botConnected = true;
+							break;
 						} else {
 							System.out.println("kek");
 						}

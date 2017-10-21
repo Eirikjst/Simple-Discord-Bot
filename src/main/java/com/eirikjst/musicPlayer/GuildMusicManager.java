@@ -1,4 +1,4 @@
-package com.eirikjst;
+package com.eirikjst.musicPlayer;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;

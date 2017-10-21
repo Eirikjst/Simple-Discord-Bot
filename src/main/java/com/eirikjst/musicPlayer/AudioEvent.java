@@ -1,4 +1,4 @@
-package com.eirikjst;
+package com.eirikjst.musicPlayer;
 
 import java.util.HashMap;
 import java.util.Map;

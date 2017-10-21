@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sx.blah.discord.handle.impl.obj.Guild;
 import sx.blah.discord.handle.impl.obj.User;
-import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.handle.obj.IVoiceChannel;
 
@@ -93,6 +91,7 @@ public class MessageCommands {
 		});
 	}
 	// not working
+	/*
 	private void moveUser() {
 		commands.put("move", (event, args) ->{
 			String[] arg = args.get(0).split(" ");
@@ -135,5 +134,5 @@ public class MessageCommands {
 				}
 			}
 		});
-	}
+	}*/
 }
